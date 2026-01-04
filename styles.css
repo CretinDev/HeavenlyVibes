@@ -158,11 +158,12 @@ body {
     position: relative;
     z-index: 3;
     padding-left: 4.5%;
-    max-width: 1200px;
+    max-width: min(1200px, 30vw);
+    width: fit-content;
 }
 
 .hero-content h1 {
-    font-size: 4rem;
+    font-size: clamp(2rem, 4vw, 3.4rem);
     font-weight: 200;
     margin-bottom: 0.5rem;
     letter-spacing: 4px;
@@ -173,7 +174,7 @@ body {
 }
 
 .tagline {
-    font-size: 1.3rem;
+    font-size: clamp(0.9rem, 1.5vw, 1.3rem);
     font-weight: 300;
     color: #e0e0e0;
     margin-bottom: 0.6rem;
@@ -185,24 +186,27 @@ body {
 
 .sector-buttons {
     display: flex;
-    gap: 1rem;
+    gap: clamp(0.3rem, 1vw, 1rem);
     margin-top: 2rem;
     animation: fadeInUp 1s ease 0.3s backwards;
+    max-width: 100%;
 }
 
 .sector-btn {
-    padding: 0.8rem 1.8rem;
+    padding: clamp(0.3rem, 0.5vw + 0.2rem, 0.72rem) clamp(0.6rem, 1vw + 0.3rem, 1.62rem);
     background-color: transparent;
     color: #ffffff;
     border: 1px solid rgba(255, 255, 255, 0.3);
-    font-size: 0.9rem;
+    font-size: clamp(0.45rem, 0.5vw + 0.2rem, 0.81rem);
     font-weight: 300;
-    letter-spacing: 1px;
+    letter-spacing: clamp(0.3px, 0.05vw + 0.2px, 1px);
     text-transform: uppercase;
     cursor: pointer;
     transition: all 0.3s ease;
     font-family: inherit;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
+    flex-shrink: 1;
+    white-space: nowrap;
 }
 
 .sector-btn:hover {
@@ -219,13 +223,13 @@ body {
 
 .sector-description {
     margin-top: 2rem;
-    max-width: 500px;
+    max-width: min(500px, 25vw);
     animation: fadeInUp 1s ease 0.4s backwards;
 }
 
 .description-text {
     display: none;
-    font-size: 1.3rem;
+    font-size: clamp(0.9rem, 1.3vw, 1.17rem);
     line-height: 1.8;
     color: #cccccc;
     font-weight: 300;
@@ -531,6 +535,12 @@ footer p {
 }
 
 /* Responsive Design */
+@media (max-width: 1200px) {
+    .sector-buttons {
+        flex-wrap: wrap;
+    }
+}
+
 @media (max-width: 768px) {
     .nav-links {
         display: none;
@@ -540,28 +550,109 @@ footer p {
         display: flex;
     }
 
-    .hero-content {
-        padding-left: 5%;
-    }
-
-    .hero-content h1 {
-        font-size: 2.5rem;
-    }
-
-    .tagline {
-        font-size: 1.2rem;
-    }
-
-    .sectors {
+    /* Smaller nav logo on mobile to prevent wrapping */
+    .logo {
         font-size: 1rem;
     }
 
+    /* Mobile Hero Layout - Vertical Stack */
+    .hero {
+        padding-top: 80px;
+        padding-bottom: 2rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        height: auto;
+        min-height: auto;
+    }
+
+    /* Hide redundant title and tagline on mobile */
+    .hero-content h1,
+    .tagline {
+        display: none;
+    }
+
+    /* Hero content - use display: contents to allow reordering children */
+    .hero-content {
+        position: relative;
+        padding: 0;
+        max-width: 100%;
+        width: 100%;
+        text-align: center;
+        display: contents;
+    }
+
+    /* Buttons - centered on mobile, ABOVE video */
+    .sector-buttons {
+        justify-content: center;
+        flex-wrap: nowrap;
+        gap: 0.5rem;
+        margin: 0.3rem auto 1rem auto;
+        padding: 0 5%;
+        order: 1;
+    }
+
+    .sector-btn {
+        font-size: 0.7rem;
+        padding: 0.6rem 0.9rem;
+        letter-spacing: 0.5px;
+    }
+
+    /* Video - Full width on mobile, BETWEEN buttons and text */
+    .hero-video {
+        position: relative;
+        top: auto;
+        right: auto;
+        transform: none;
+        width: 90%;
+        max-width: 100%;
+        margin: 0 auto 1rem;
+        order: 2;
+    }
+
+    .hero-video.active {
+        display: block;
+    }
+
+    /* Description text - centered, BELOW video */
+    .sector-description {
+        max-width: 100%;
+        text-align: center;
+        margin: 0 auto 0.5rem;
+        padding: 0 5%;
+        order: 3;
+    }
+
+    .description-text {
+        font-size: 1rem;
+        line-height: 1.6;
+    }
+
+    /* Hide scroll indicator on mobile */
     .scroll-indicator {
-        left: 5%;
+        display: none;
+    }
+
+    /* Reduce About section top padding on mobile */
+    .about {
+        padding: 40px 0 100px 0;
+    }
+
+    /* Match About Us header to nav logo size */
+    .about h2 {
+        font-size: 1.2rem;
+    }
+
+    /* Match About Us paragraph text to description text size and spacing */
+    .about-text p {
+        font-size: 1rem !important;
+        line-height: 1.6;
+        margin-bottom: 1.2rem;
+        letter-spacing: 0.3px;
     }
 
     .portfolio h2,
-    .about h2,
     .contact h2 {
         font-size: 2rem;
     }
@@ -580,16 +671,22 @@ footer p {
 }
 
 @media (max-width: 480px) {
-    .hero-content h1 {
-        font-size: 2rem;
+    /* Even smaller buttons on very small phones */
+    .sector-btn {
+        font-size: 0.65rem;
+        padding: 0.5rem 0.7rem;
+        letter-spacing: 0.3px;
     }
 
-    .tagline {
-        font-size: 1rem;
+    .sector-buttons {
+        gap: 0.4rem;
     }
 
-    .cta-button {
-        padding: 0.8rem 1.8rem;
-        font-size: 1rem;
+    .hero-video {
+        width: 95%;
+    }
+
+    .description-text {
+        font-size: 0.9rem;
     }
 }

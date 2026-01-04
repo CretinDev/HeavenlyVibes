@@ -16,8 +16,25 @@ function shuffleGallery() {
     items.forEach(item => gallery.appendChild(item));
 }
 
+// Add loaded class to images when they finish loading
+function handleImageLoad() {
+    const images = document.querySelectorAll('.gallery-item img');
+    images.forEach(img => {
+        if (img.complete) {
+            img.classList.add('loaded');
+        } else {
+            img.addEventListener('load', () => {
+                img.classList.add('loaded');
+            });
+        }
+    });
+}
+
 // Run shuffle when page loads
-window.addEventListener('DOMContentLoaded', shuffleGallery);
+window.addEventListener('DOMContentLoaded', () => {
+    shuffleGallery();
+    handleImageLoad();
+});
 
 // Navbar background on scroll
 const navbar = document.getElementById('navbar');
