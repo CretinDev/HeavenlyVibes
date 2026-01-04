@@ -118,15 +118,16 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    padding-top: 150px;
+    padding-top: 120px;
     position: relative;
     background-color: #000000;
     overflow: hidden;
+    margin-bottom: -80px;
 }
 
 .hero-video {
     position: absolute;
-    top: 50%;
+    top: 48%;
     right: 4.5%;
     transform: translateY(-50%);
     width: 62.5%;
@@ -163,10 +164,10 @@ body {
 }
 
 .hero-content h1 {
-    font-size: clamp(2rem, 4vw, 3.4rem);
+    font-size: clamp(2rem, 3.5vw, 3rem);
     font-weight: 200;
     margin-bottom: 0.5rem;
-    letter-spacing: 4px;
+    letter-spacing: 3px;
     animation: fadeInUp 1s ease;
     text-align: left;
     line-height: 1.1;
@@ -187,7 +188,7 @@ body {
 .sector-buttons {
     display: flex;
     gap: clamp(0.3rem, 1vw, 1rem);
-    margin-top: 2rem;
+    margin-top: 1.75rem;
     animation: fadeInUp 1s ease 0.3s backwards;
     max-width: 100%;
 }
@@ -222,7 +223,7 @@ body {
 }
 
 .sector-description {
-    margin-top: 2rem;
+    margin-top: 1.75rem;
     max-width: min(500px, 25vw);
     animation: fadeInUp 1s ease 0.4s backwards;
 }
@@ -373,10 +374,11 @@ body {
 
 .about h2 {
     text-align: left;
-    font-size: 2.5rem;
+    font-size: clamp(1.2rem, 5vw, 2.5rem);
     font-weight: 300;
-    margin-bottom: 3rem;
-    letter-spacing: 3px;
+    margin-top: 0;
+    margin-bottom: 2rem;
+    letter-spacing: clamp(1px, 0.3vw, 3px);
     text-transform: uppercase;
 }
 
@@ -544,7 +546,8 @@ footer p {
 
     /* Smaller nav logo on mobile to prevent wrapping */
     .logo {
-        font-size: 1rem;
+        font-size: 0.85rem;
+        letter-spacing: 1px;
     }
 
     /* Mobile Hero Layout - Vertical Stack */
@@ -557,6 +560,7 @@ footer p {
         justify-content: flex-start;
         height: auto;
         min-height: auto;
+        margin-bottom: 0;
     }
 
     /* Hide redundant title and tagline on mobile */
@@ -629,11 +633,21 @@ footer p {
     /* Reduce About section top padding on mobile */
     .about {
         padding: 40px 0 100px 0;
+        position: relative;
+        z-index: 10;
     }
 
-    /* Match About Us header to nav logo size */
+    /* Fluid scaling About Us header on mobile */
     .about h2 {
-        font-size: 1.2rem;
+        font-size: clamp(0.9rem, 3vw, 1.2rem);
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        max-width: 100%;
+    }
+
+    .about .container {
+        overflow: visible;
+        max-width: 100%;
     }
 
     /* Match About Us paragraph text to description text size and spacing */
