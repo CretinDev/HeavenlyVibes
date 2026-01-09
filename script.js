@@ -1,11 +1,8 @@
 // Hero video sector switching
-let currentSector = 'commercial';
+let currentSector = 'default';
 let currentVideoIndex = 0;
 const allVideos = document.querySelectorAll('.hero-video');
 const sectorButtons = document.querySelectorAll('.sector-btn');
-
-// Set first button as active
-sectorButtons[0].classList.add('active');
 
 // Check if video file actually exists
 function videoExists(video) {
@@ -105,10 +102,10 @@ sectorButtons.forEach(button => {
 
         // Update description text
         const allDescriptions = document.querySelectorAll('.description-text');
-        allDescriptions.forEach(desc => desc.style.display = 'none');
+        allDescriptions.forEach(desc => desc.classList.remove('active'));
         const activeDescription = document.querySelector(`.description-text[data-sector="${sector}"]`);
         if (activeDescription) {
-            activeDescription.style.display = 'block';
+            activeDescription.classList.add('active');
         }
     });
 });
@@ -144,14 +141,6 @@ let lastScroll = 0;
 
 window.addEventListener('scroll', () => {
     const currentScroll = window.pageYOffset;
-
-    // Add shadow when scrolled
-    if (currentScroll > 50) {
-        navbar.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.5)';
-    } else {
-        navbar.style.boxShadow = 'none';
-    }
-
     lastScroll = currentScroll;
 });
 

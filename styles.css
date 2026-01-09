@@ -32,19 +32,17 @@ body {
     position: fixed;
     top: 0;
     width: 100%;
-    background-color: rgba(0, 0, 0, 0.95);
-    backdrop-filter: blur(10px);
+    background-color: transparent;
     z-index: 1000;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .nav-container {
-    max-width: 1200px;
-    margin: 0 auto;
+    max-width: 100%;
+    margin: 0;
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
     align-items: center;
-    padding: 1.2rem 20px;
+    padding: 1.2rem 4.5%;
 }
 
 .logo {
@@ -114,27 +112,58 @@ body {
 
 /* Hero Section */
 .hero {
-    height: 100vh;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    padding-top: 120px;
     position: relative;
     background-color: #000000;
     overflow: hidden;
-    margin-bottom: -80px;
+    margin-bottom: -150px;
+    padding-top: 0;
+}
+
+.hero-layout {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    width: 100%;
+    height: 100%;
+    padding: 0 4.5%;
+    gap: 2rem;
+}
+
+/* Left Column - Title and Tagline */
+.hero-content {
+    flex: 0 0 35%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding-top: calc(4rem + 5px);
+    z-index: 3;
+}
+
+/* Right Column - Video Section */
+.hero-video-section {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    position: relative;
+    padding-top: 1.2rem;
+}
+
+.video-container {
+    width: 100%;
+    position: relative;
 }
 
 .hero-video {
-    position: absolute;
-    top: 48%;
-    right: 4.5%;
-    transform: translateY(-50%);
-    width: 62.5%;
+    width: 100%;
     height: auto;
     object-fit: contain;
     opacity: 0;
-    z-index: 1;
     display: none;
 }
 
@@ -143,28 +172,8 @@ body {
     display: block;
 }
 
-/* .hero::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(120deg, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 30%, rgba(0,0,0,0) 50%);
-    z-index: 2;
-    pointer-events: none;
-} */
-
-.hero-content {
-    position: relative;
-    z-index: 3;
-    padding-left: 4.5%;
-    max-width: min(1200px, 30vw);
-    width: fit-content;
-}
-
 .hero-content h1 {
-    font-size: clamp(2rem, 3.5vw, 3rem);
+    font-size: clamp(2.2rem, 3.8vw, 3.4rem);
     font-weight: 200;
     margin-bottom: 0.5rem;
     letter-spacing: 3px;
@@ -187,10 +196,33 @@ body {
 
 .sector-buttons {
     display: flex;
-    gap: clamp(0.3rem, 1vw, 1rem);
-    margin-top: 1.75rem;
+    gap: clamp(0.5rem, 1.2vw, 1.3rem);
+    margin-top: calc(4rem + 12px);
+    margin-bottom: calc(2.5rem - 9px);
     animation: fadeInUp 1s ease 0.3s backwards;
-    max-width: 100%;
+    justify-content: center;
+}
+
+.sector-description {
+    margin-top: 1.5rem;
+}
+
+.description-text {
+    display: none;
+    font-size: clamp(0.95rem, 1.1vw, 1.1rem);
+    line-height: 1.7;
+    color: #cccccc;
+    font-weight: 300;
+    letter-spacing: 0.3px;
+    text-align: left;
+}
+
+.description-text.active {
+    display: block;
+}
+
+.description-text p {
+    margin-bottom: 0;
 }
 
 .sector-btn {
@@ -222,35 +254,16 @@ body {
     color: #000000;
 }
 
-.sector-description {
-    margin-top: 1.75rem;
-    max-width: min(500px, 25vw);
-    animation: fadeInUp 1s ease 0.4s backwards;
-}
-
-.description-text {
-    display: none;
-    font-size: clamp(0.9rem, 1.3vw, 1.17rem);
-    line-height: 1.8;
-    color: #cccccc;
-    font-weight: 300;
-    letter-spacing: 0.3px;
-}
-
-.description-text[data-sector="commercial"] {
-    display: block;
-}
-
-.description-text p {
-    margin-bottom: 1.2rem;
-}
-
-.description-text p:last-child {
-    margin-bottom: 0;
-}
 
 .scroll-indicator {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
     display: none;
+    flex-direction: column;
+    align-items: center;
+    z-index: 10;
 }
 
 .scroll-indicator span {
@@ -364,6 +377,8 @@ body {
     min-height: 100vh;
     padding: 100px 0;
     background-color: #000000;
+    position: relative;
+    z-index: 10;
 }
 
 .about .container {
@@ -380,6 +395,8 @@ body {
     margin-bottom: 2rem;
     letter-spacing: clamp(1px, 0.3vw, 3px);
     text-transform: uppercase;
+    position: relative;
+    z-index: 11;
 }
 
 .about-content {
@@ -430,11 +447,15 @@ body {
     background-color: #000000;
 }
 
-.contact h2 {
+.contact-section-wrapper {
+    padding: 0 4.5%;
+}
+
+.contact-section-wrapper h2 {
     text-align: left;
     font-size: 2.5rem;
     font-weight: 300;
-    margin-bottom: 3rem;
+    margin-bottom: 1.5rem;
     letter-spacing: 3px;
     text-transform: uppercase;
 }
@@ -442,9 +463,9 @@ body {
 .contact-content {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 50px;
-    max-width: 1000px;
-    margin: 0 auto;
+    gap: 80px;
+    max-width: 100%;
+    margin: 0;
 }
 
 .contact-info {
@@ -473,7 +494,11 @@ body {
 .contact-form {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 15px;
+    max-width: 450px;
+    margin-left: 100px;
+    margin-right: 55px;
+    margin-top: 80px;
 }
 
 .form-group input,
@@ -554,39 +579,31 @@ footer p {
     .hero {
         padding-top: 80px;
         padding-bottom: 2rem;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: flex-start;
         height: auto;
         min-height: auto;
         margin-bottom: 0;
     }
 
-    /* Hide redundant title and tagline on mobile */
-    .hero-content h1,
-    .tagline {
+    .hero-layout {
+        flex-direction: column;
+        padding: 0 5%;
+        gap: 1rem;
+    }
+
+    /* Hide title and tagline on mobile */
+    .hero-content {
         display: none;
     }
 
-    /* Hero content - use display: contents to allow reordering children */
-    .hero-content {
-        position: relative;
-        padding: 0;
-        max-width: 100%;
+    /* Video section takes full width */
+    .hero-video-section {
+        flex: none;
         width: 100%;
-        text-align: center;
-        display: contents;
     }
 
-    /* Buttons - centered on mobile, ABOVE video */
     .sector-buttons {
-        justify-content: center;
-        flex-wrap: nowrap;
         gap: 0.5rem;
-        margin: 0.3rem auto 1rem auto;
-        padding: 0 5%;
-        order: 1;
+        margin-bottom: 1rem;
     }
 
     .sector-btn {
@@ -595,35 +612,26 @@ footer p {
         letter-spacing: 0.5px;
     }
 
-    /* Video - Full width on mobile, BETWEEN buttons and text */
-    .hero-video {
-        position: relative;
-        top: auto;
-        right: auto;
-        transform: none;
-        width: 90%;
-        max-width: 100%;
-        margin: 0 auto 1rem;
-        order: 2;
-    }
-
-    .hero-video.active {
-        display: block;
-    }
-
-    /* Description text - centered, BELOW video */
     .sector-description {
         max-width: 100%;
         text-align: center;
-        margin: 0 auto 0.5rem;
-        padding: 0 5%;
-        order: 3;
+        margin-top: 1rem;
     }
 
     .description-text {
-        font-size: 1rem;
+        font-size: 0.95rem;
         line-height: 1.6;
+        text-align: center;
     }
+
+    .video-container {
+        width: 100%;
+    }
+
+    .hero-video {
+        width: 100%;
+    }
+
 
     /* Hide scroll indicator on mobile */
     .scroll-indicator {
@@ -686,10 +694,6 @@ footer p {
 
     .sector-buttons {
         gap: 0.4rem;
-    }
-
-    .hero-video {
-        width: 95%;
     }
 
     .description-text {

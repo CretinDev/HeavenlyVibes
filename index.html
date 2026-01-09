@@ -10,7 +10,6 @@
     <!-- Navigation Bar -->
     <nav id="navbar">
         <div class="nav-container">
-            <a href="#top" class="logo">LakeLife Photo Co.</a>
             <ul class="nav-links">
                 <li><a href="#portfolio">Portfolio</a></li>
                 <li><a href="gallery.html">Gallery</a></li>
@@ -26,48 +25,75 @@
 
     <!-- Hero Section -->
     <section id="portfolio" class="hero">
-        <video class="hero-video active" autoplay muted playsinline data-sector="commercial" data-index="0">
-            <source src="assets/commercial-1.mp4" type="video/mp4">
-        </video>
-        <video class="hero-video" muted playsinline data-sector="commercial" data-index="1">
-            <source src="assets/commercial-2.mp4" type="video/mp4">
-        </video>
-        <video class="hero-video" muted playsinline data-sector="industrial" data-index="0">
-            <source src="assets/industrial-1.mp4" type="video/mp4">
-        </video>
-        <video class="hero-video" muted playsinline data-sector="industrial" data-index="1">
-            <source src="assets/industrial-2.mp4" type="video/mp4">
-        </video>
-        <video class="hero-video" muted playsinline data-sector="industrial" data-index="2">
-            <source src="assets/industrial-3.mp4" type="video/mp4">
-        </video>
-        <video class="hero-video" muted playsinline data-sector="realestate" data-index="0">
-            <source src="assets/realestate-1.mp4" type="video/mp4">
-        </video>
-        <video class="hero-video" muted playsinline data-sector="realestate" data-index="1">
-            <source src="assets/realestate-2.mp4" type="video/mp4">
-        </video>
-        <div class="hero-content">
-            <h1>LakeLife Photo Co.</h1>
-            <p class="tagline">Nipissing Based Aerial Imagery</p>
-            <div class="sector-buttons">
-                <button class="sector-btn" data-sector="commercial">Commercial</button>
-                <button class="sector-btn" data-sector="industrial">Industrial</button>
-                <button class="sector-btn" data-sector="realestate">Real Estate</button>
+        <div class="hero-layout">
+            <!-- Left Column: Title and Tagline -->
+            <div class="hero-content">
+                <h1>LakeLife Photo Co.</h1>
+                <p class="tagline">Nipissing Based Aerial Imagery</p>
+
+                <div class="sector-description">
+                    <div class="description-text active" data-sector="default">
+                        <p>We use professional drone imagery to help organizations tell clearer stories, document work that matters, and engage audiences from perspectives that ground cameras can't capture.</p>
+                    </div>
+                    <div class="description-text" data-sector="commercial">
+                        <p>The key to running a successful business in the remote landscape of Northern Ontario, is reach. Whether it's a remote lakeside campground, or a golf course on a hill top, we will go the distance to capture the essence of your commercial asset in the best light possible.</p>
+                    </div>
+                    <div class="description-text" data-sector="industrial">
+                        <p>Getting imagery of big rigs and industrial equipment is always a privilege. Our goal is to help your company show off your construction projects from start to finish. We offer detailed service contracts that lock in designated routine visits to a location, as well as options for on demand visit requests.</p>
+                    </div>
+                    <div class="description-text" data-sector="realestate">
+                        <p>Captivating real estate imagery that helps properties stand out and sell faster. Our aerial perspectives showcase homes and land in their best light, giving potential buyers a complete view of the property.</p>
+                    </div>
+                    <div class="description-text" data-sector="tourism">
+                        <p>Showcase the beauty and adventure of your destination with stunning aerial footage that inspires travelers and captures the essence of what makes your location special.</p>
+                    </div>
+                </div>
             </div>
-            <div class="sector-description">
-                <div class="description-text" data-sector="commercial">
-                    <p>The key to running a successful business in the remote landscape of Northern Ontario, is reach. Whether its a remote lakeside campground, or a golf course on a hill top, we will go the distance to capture the essence of your commercial asset in the best light possible. We will work with you to plan the perfect day to show off your property or business. We offer inclusive editing, provide raw footage, and</p>
+
+            <!-- Right Column: Buttons and Videos -->
+            <div class="hero-video-section">
+                <div class="sector-buttons">
+                    <button class="sector-btn" data-sector="commercial">Commercial</button>
+                    <button class="sector-btn" data-sector="industrial">Industrial</button>
+                    <button class="sector-btn" data-sector="realestate">Real Estate</button>
+                    <button class="sector-btn" data-sector="tourism">Tourism</button>
                 </div>
-                <div class="description-text" data-sector="industrial">
-                    <p>Getting imagery of big rigs and industrial equipment is always a privilege . Our goal is to help your company show off your construction projects from start to finish. That considered, industrial projects will often require repeat visits in order to document a clear progression of construction.</p>
-                    <p>We offer detailed and service contracts that lock in designated routine visits to a location, and well as options for on demand visit requests. If something exciting is going on at the jobsite that wasn't explicitly defined in the contract, we do what we can to facilitate capturing key moments in development, at a moments notice.</p>
-                </div>
-                <div class="description-text" data-sector="realestate">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum. Captivating real estate imagery that helps properties stand out and sell faster.</p>
+
+                <div class="video-container">
+                    <video class="hero-video active" autoplay muted loop playsinline data-sector="default">
+                        <source src="assets/default-hero.mp4" type="video/mp4">
+                    </video>
+                    <video class="hero-video" muted playsinline data-sector="commercial" data-index="0">
+                        <source src="assets/commercial-1.mp4" type="video/mp4">
+                    </video>
+                    <video class="hero-video" muted playsinline data-sector="commercial" data-index="1">
+                        <source src="assets/commercial-2.mp4" type="video/mp4">
+                    </video>
+                    <video class="hero-video" muted playsinline data-sector="industrial" data-index="0">
+                        <source src="assets/industrial-1.mp4" type="video/mp4">
+                    </video>
+                    <video class="hero-video" muted playsinline data-sector="industrial" data-index="1">
+                        <source src="assets/industrial-2.mp4" type="video/mp4">
+                    </video>
+                    <video class="hero-video" muted playsinline data-sector="industrial" data-index="2">
+                        <source src="assets/industrial-3.mp4" type="video/mp4">
+                    </video>
+                    <video class="hero-video" muted playsinline data-sector="realestate" data-index="0">
+                        <source src="assets/realestate-1.mp4" type="video/mp4">
+                    </video>
+                    <video class="hero-video" muted playsinline data-sector="realestate" data-index="1">
+                        <source src="assets/realestate-2.mp4" type="video/mp4">
+                    </video>
+                    <video class="hero-video" muted playsinline data-sector="tourism" data-index="0">
+                        <source src="assets/tourism-1.mp4" type="video/mp4">
+                    </video>
+                    <video class="hero-video" muted playsinline data-sector="tourism" data-index="1">
+                        <source src="assets/tourism-2.mp4" type="video/mp4">
+                    </video>
                 </div>
             </div>
         </div>
+
         <div class="scroll-indicator">
             <span>Scroll Down</span>
             <div class="arrow"></div>
@@ -78,33 +104,20 @@
     <!-- About/Contact Section -->
     <section id="contact" class="about contact">
         <div class="container">
-            <h2>About Us</h2>
+            <h2>About Me</h2>
             <div class="about-content">
                 <div class="about-text">
                     <p>Hi. My name is Jim Craven. I am the owner, operator, and primary driver of the LakeLife Photo Co. I moved to the Nipissing area from the United States in 2016 after earning a Telecommunications degree in Broadcast and Media production in Arizona. I have an interest in exploration imagery, and have a very "boots on the ground" approach to my work. I enjoy industrial and construction imagery and like to provide progression updates of development projects taking place around the Nipissing area.</p>
                     <p>In addition to drone imagery, I do the very niche and notorious artwork known as stereoscopic 3d film photography. And within the film medium I also offer candid portraiture and event photography for weddings, engagements, and celebrations of life. You can find a collection of artistic and event based work in my gallery.</p>
-                    <div class="services">
-                        <h3>Our Services</h3>
-                        <ul>
-                            <li>Real Estate Photography & Video</li>
-                            <li>Event Coverage</li>
-                            <li>Landscape & Nature Photography</li>
-                            <li>Commercial & Promotional Content</li>
-                        </ul>
-                    </div>
                 </div>
             </div>
+        </div>
 
-            <h2 style="margin-top: 4rem;">Get In Touch</h2>
+        <div class="contact-section-wrapper">
+            <h2 style="margin-top: 4rem;">Our Services</h2>
             <div class="contact-content">
                 <div class="contact-info">
-                    <p>Feel free to reach out if you have any questions or would like to inquire about visual documentation for your upcoming events or projects.</p>
-                    <div class="info-item">
-                        <strong>Email:</strong> info@lakelifephoto.com
-                    </div>
-                    <div class="info-item">
-                        <strong>Phone:</strong> (555) 123-4567
-                    </div>
+                    <p>We specialize in real estate photography and video, providing stunning aerial perspectives that showcase properties in their best light. Our event coverage captures the moments that matter most, from weddings to corporate gatherings. We excel in landscape and nature photography, revealing the beauty of Northern Ontario's wilderness. Our commercial and promotional content helps businesses tell their story through compelling visual narratives.</p>
                 </div>
                 <form class="contact-form">
                     <div class="form-group">

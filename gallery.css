@@ -1,5 +1,15 @@
 /* Gallery Page Styles */
 
+/* Gallery page navbar customization */
+#navbar .nav-container {
+    justify-content: space-between;
+}
+
+#navbar .logo {
+    display: block;
+    margin-left: 2rem;
+}
+
 .gallery-section {
     min-height: 100vh;
     padding-top: 120px;
