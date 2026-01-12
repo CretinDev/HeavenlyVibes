@@ -1,13 +1,34 @@
 /* Gallery Page Styles */
 
 /* Gallery page navbar customization */
+#navbar {
+    box-shadow: none;
+    border: none;
+    border-bottom: none;
+    background-image: none;
+}
+
 #navbar .nav-container {
     justify-content: space-between;
+    box-shadow: none;
+    border: none;
+    background: none;
 }
 
 #navbar .logo {
     display: block;
     margin-left: 2rem;
+    line-height: 1;
+}
+
+/* Ensure nav links are same size as main page */
+#navbar .nav-links {
+    align-self: center;
+}
+
+#navbar .nav-links a {
+    font-size: 0.9rem;
+    line-height: 1;
 }
 
 .gallery-section {

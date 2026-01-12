@@ -21,6 +21,16 @@ body {
     height: 100vh;
 }
 
+/* Playfair Display for titles and paragraphs */
+h1, h2, h3, h4, h5, h6, p {
+    font-family: 'Playfair Display', serif;
+}
+
+/* Playfair Display for navigation */
+.nav-links a, .logo {
+    font-family: 'Playfair Display', serif;
+}
+
 .container {
     max-width: 1200px;
     margin: 0 auto;
@@ -33,6 +43,10 @@ body {
     top: 0;
     width: 100%;
     background-color: transparent;
+    background-image: none;
+    box-shadow: none;
+    border: none;
+    border-bottom: none;
     z-index: 1000;
 }
 
@@ -43,6 +57,9 @@ body {
     justify-content: flex-end;
     align-items: center;
     padding: 1.2rem 4.5%;
+    box-shadow: none;
+    border: none;
+    background: none;
 }
 
 .logo {
@@ -139,7 +156,8 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    padding-top: calc(4rem + 5px);
+    padding-top: calc(4rem + 5px - 35px);
+    margin-left: -35px;
     z-index: 3;
 }
 
@@ -151,16 +169,18 @@ body {
     align-items: center;
     justify-content: flex-start;
     position: relative;
-    padding-top: 1.2rem;
+    padding-top: calc(1.2rem + 35px);
 }
 
 .video-container {
-    width: 100%;
+    width: 95%;
     position: relative;
+    max-height: 90vh;
 }
 
 .hero-video {
     width: 100%;
+    max-height: 90vh;
     height: auto;
     object-fit: contain;
     opacity: 0;
@@ -184,13 +204,15 @@ body {
 }
 
 .tagline {
-    font-size: clamp(0.9rem, 1.5vw, 1.3rem);
+    font-size: clamp(1rem, 1.6vw, 1.45rem);
     font-weight: 300;
-    color: #e0e0e0;
+    color: #ffffff;
     margin-bottom: 0.6rem;
+    margin-left: 3.5rem;
     animation: fadeInUp 1s ease 0.2s backwards;
     text-align: left;
-    letter-spacing: 1px;
+    letter-spacing: 2.5px;
+    word-spacing: 8px;
     text-shadow: 0 3px 10px rgba(0, 0, 0, 0.8);
 }
 
@@ -211,7 +233,7 @@ body {
     display: none;
     font-size: clamp(0.95rem, 1.1vw, 1.1rem);
     line-height: 1.7;
-    color: #cccccc;
+    color: #ffffff;
     font-weight: 300;
     letter-spacing: 0.3px;
     text-align: left;
@@ -407,7 +429,7 @@ body {
     font-size: 1.2rem;
     line-height: 1.8;
     margin-bottom: 1.5rem;
-    color: #cccccc;
+    color: #ffffff;
 }
 
 .services {
@@ -478,7 +500,7 @@ body {
     font-size: 1.2rem;
     line-height: 1.8;
     margin-bottom: 2rem;
-    color: #cccccc;
+    color: #ffffff;
 }
 
 .info-item {
@@ -587,22 +609,57 @@ footer p {
     .hero-layout {
         flex-direction: column;
         padding: 0 5%;
-        gap: 1rem;
+        gap: 0.4rem;
     }
 
-    /* Hide title and tagline on mobile */
+    /* Show title and tagline on mobile - top left, description in flow */
     .hero-content {
-        display: none;
+        flex: none;
+        width: 100%;
+        padding-top: 0;
+        margin-left: 0;
+        margin-bottom: 0;
+        position: relative;
+    }
+
+    .hero-content h1 {
+        position: absolute;
+        top: -67px;
+        left: 0;
+        text-align: left;
+        font-size: 1.9872rem;
+        margin-bottom: 0.2rem;
+        letter-spacing: 1px;
+        z-index: 999;
+    }
+
+    .tagline {
+        position: absolute;
+        top: -33.3px;
+        left: 0;
+        text-align: center;
+        margin-left: 2.3rem;
+        font-size: 0.84rem;
+        margin-bottom: 0;
+        z-index: 999;
+    }
+
+    .sector-description {
+        width: 100%;
+        padding: 0 5%;
+        box-sizing: border-box;
     }
 
     /* Video section takes full width */
     .hero-video-section {
         flex: none;
         width: 100%;
+        padding-top: 0.5rem;
     }
 
     .sector-buttons {
         gap: 0.5rem;
+        margin-top: 1.275rem;
         margin-bottom: 1rem;
     }
 
@@ -614,12 +671,15 @@ footer p {
 
     .sector-description {
         max-width: 100%;
+        width: 100%;
         text-align: center;
-        margin-top: 1rem;
+        margin-top: 0;
+        margin-bottom: 0;
+        padding: 0;
     }
 
     .description-text {
-        font-size: 0.95rem;
+        font-size: 0.88rem;
         line-height: 1.6;
         text-align: center;
     }
@@ -660,10 +720,16 @@ footer p {
 
     /* Match About Us paragraph text to description text size and spacing */
     .about-text p {
-        font-size: 1rem !important;
+        font-size: 0.88rem !important;
         line-height: 1.6;
         margin-bottom: 1.2rem;
         letter-spacing: 0.3px;
+    }
+
+    /* Reduce Our Services text size on mobile */
+    .contact-info p {
+        font-size: 0.88rem;
+        line-height: 1.6;
     }
 
     .portfolio h2,
@@ -697,6 +763,6 @@ footer p {
     }
 
     .description-text {
-        font-size: 0.9rem;
+        font-size: 0.84rem;
     }
 }

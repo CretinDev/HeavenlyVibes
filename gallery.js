@@ -36,19 +36,19 @@ window.addEventListener('DOMContentLoaded', () => {
     handleImageLoad();
 });
 
-// Navbar background on scroll
-const navbar = document.getElementById('navbar');
-
-window.addEventListener('scroll', () => {
-    const currentScroll = window.pageYOffset;
-
-    // Add shadow when scrolled
-    if (currentScroll > 50) {
-        navbar.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.5)';
-    } else {
-        navbar.style.boxShadow = 'none';
-    }
-});
+// Navbar background on scroll - REMOVED to eliminate gradient overlay
+// const navbar = document.getElementById('navbar');
+//
+// window.addEventListener('scroll', () => {
+//     const currentScroll = window.pageYOffset;
+//
+//     // Add shadow when scrolled
+//     if (currentScroll > 50) {
+//         navbar.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.5)';
+//     } else {
+//         navbar.style.boxShadow = 'none';
+//     }
+// });
 
 // Mobile menu toggle functionality
 const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
