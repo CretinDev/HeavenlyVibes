@@ -54,7 +54,7 @@ h1, h2, h3, h4, h5, h6, p {
     max-width: 100%;
     margin: 0;
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
     align-items: center;
     padding: 1.2rem 4.5%;
     box-shadow: none;
@@ -63,9 +63,9 @@ h1, h2, h3, h4, h5, h6, p {
 }
 
 .logo {
-    font-size: 1.2rem;
+    font-size: 2.25rem;
     font-weight: 400;
-    letter-spacing: 2px;
+    letter-spacing: 5.5px;
     color: #ffffff;
     text-transform: uppercase;
     text-decoration: none;
@@ -169,13 +169,15 @@ h1, h2, h3, h4, h5, h6, p {
     align-items: center;
     justify-content: flex-start;
     position: relative;
-    padding-top: calc(1.2rem + 35px);
+    padding-top: calc(1.2rem + 25px);
 }
 
 .video-container {
     width: 95%;
     position: relative;
     max-height: 90vh;
+    overflow: hidden;
+    aspect-ratio: 16/9;
 }
 
 .hero-video {
@@ -183,17 +185,26 @@ h1, h2, h3, h4, h5, h6, p {
     max-height: 90vh;
     height: auto;
     object-fit: contain;
+    position: absolute;
+    top: 0;
+    left: 0;
     opacity: 0;
-    display: none;
+    visibility: hidden;
+    z-index: 1;
 }
 
 .hero-video.active {
+    visibility: visible;
+    z-index: 2;
+}
+
+.hero-video.fade-in {
+    transition: opacity 0.3s ease;
     opacity: 1;
-    display: block;
 }
 
 .hero-content h1 {
-    font-size: clamp(2.2rem, 3.8vw, 3.4rem);
+    font-size: clamp(2.4rem, 4.2vw, 3.8rem);
     font-weight: 200;
     margin-bottom: 0.5rem;
     letter-spacing: 3px;
@@ -201,10 +212,14 @@ h1, h2, h3, h4, h5, h6, p {
     text-align: left;
     line-height: 1.1;
     text-shadow: 0 4px 12px rgba(0, 0, 0, 0.8);
+    position: relative;
+    width: 140%;
+    z-index: 5;
+    will-change: transform, opacity;
 }
 
 .tagline {
-    font-size: clamp(1rem, 1.6vw, 1.45rem);
+    font-size: clamp(1.1rem, 1.75vw, 1.6rem);
     font-weight: 300;
     color: #ffffff;
     margin-bottom: 0.6rem;
@@ -214,6 +229,7 @@ h1, h2, h3, h4, h5, h6, p {
     letter-spacing: 2.5px;
     word-spacing: 8px;
     text-shadow: 0 3px 10px rgba(0, 0, 0, 0.8);
+    will-change: transform, opacity;
 }
 
 .sector-buttons {
@@ -223,6 +239,7 @@ h1, h2, h3, h4, h5, h6, p {
     margin-bottom: calc(2.5rem - 9px);
     animation: fadeInUp 1s ease 0.3s backwards;
     justify-content: center;
+    will-change: transform, opacity;
 }
 
 .sector-description {
@@ -231,7 +248,7 @@ h1, h2, h3, h4, h5, h6, p {
 
 .description-text {
     display: none;
-    font-size: clamp(0.95rem, 1.1vw, 1.1rem);
+    font-size: clamp(1.1rem, 1.25vw, 1.3rem);
     line-height: 1.7;
     color: #ffffff;
     font-weight: 300;
@@ -244,7 +261,25 @@ h1, h2, h3, h4, h5, h6, p {
 }
 
 .description-text p {
+    margin-bottom: 0.8rem;
+    padding-top: 25px;
+}
+
+.sector-benefits {
+    list-style: disc;
+    padding-left: 3.5rem;
+    margin-top: 2.25rem;
     margin-bottom: 0;
+}
+
+.sector-benefits li {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.05rem, 1.15vw, 1.2rem);
+    line-height: 1.8;
+    color: #ffffff;
+    font-weight: 300;
+    letter-spacing: 0.3px;
+    margin-bottom: 0.9rem;
 }
 
 .sector-btn {
@@ -258,7 +293,7 @@ h1, h2, h3, h4, h5, h6, p {
     text-transform: uppercase;
     cursor: pointer;
     transition: all 0.3s ease;
-    font-family: inherit;
+    font-family: 'Playfair Display', serif;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
     flex-shrink: 1;
     white-space: nowrap;
@@ -464,9 +499,10 @@ h1, h2, h3, h4, h5, h6, p {
 
 /* Contact Section */
 .contact {
-    min-height: 100vh;
-    padding: 100px 0;
+    min-height: auto;
+    padding: 30px 0 60px 0;
     background-color: #000000;
+    margin-top: -40px;
 }
 
 .contact-section-wrapper {
@@ -475,10 +511,10 @@ h1, h2, h3, h4, h5, h6, p {
 
 .contact-section-wrapper h2 {
     text-align: left;
-    font-size: 2.5rem;
+    font-size: 2.25rem;
     font-weight: 300;
     margin-bottom: 1.5rem;
-    letter-spacing: 3px;
+    letter-spacing: 5.5px;
     text-transform: uppercase;
 }
 
@@ -513,14 +549,19 @@ h1, h2, h3, h4, h5, h6, p {
     color: #4a9eff;
 }
 
+.reach-out-header {
+    display: none;
+}
+
 .contact-form {
     display: flex;
     flex-direction: column;
     gap: 15px;
     max-width: 450px;
-    margin-left: 100px;
-    margin-right: 55px;
-    margin-top: 80px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+    transform: translateX(15%);
 }
 
 .form-group input,
@@ -679,9 +720,24 @@ footer p {
     }
 
     .description-text {
-        font-size: 0.88rem;
+        font-size: 1.02rem;
         line-height: 1.6;
         text-align: center;
+    }
+
+    .sector-benefits {
+        padding-left: 2rem;
+        text-align: left;
+        margin-left: auto;
+        margin-right: auto;
+        max-width: 90%;
+        margin-top: 1.8rem;
+    }
+
+    .sector-benefits li {
+        font-size: 0.95rem;
+        line-height: 1.7;
+        margin-bottom: 0.75rem;
     }
 
     .video-container {
@@ -700,7 +756,7 @@ footer p {
 
     /* Reduce About section top padding on mobile */
     .about {
-        padding: 40px 0 100px 0;
+        padding: 40px 0 50px 0;
         position: relative;
         z-index: 10;
     }
@@ -743,6 +799,36 @@ footer p {
 
     .contact-content {
         grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .reach-out-header {
+        display: none;
+    }
+
+    .contact-form {
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 0;
+        max-width: 100%;
+        padding: 0 5%;
+        transform: none;
+    }
+
+    .form-group input,
+    .form-group textarea {
+        padding: 0.75rem;
+        font-size: 0.95rem;
+    }
+
+    .submit-button {
+        width: 100%;
+        padding: 0.75rem 2rem;
+        font-size: 1rem;
+    }
+
+    .contact {
+        padding: 15px 0 35px 0;
     }
 
     .services h3 {
@@ -763,6 +849,22 @@ footer p {
     }
 
     .description-text {
-        font-size: 0.84rem;
+        font-size: 0.98rem;
+    }
+
+    .sector-benefits li {
+        font-size: 0.88rem;
+        margin-bottom: 0.65rem;
+    }
+
+    .form-group input,
+    .form-group textarea {
+        padding: 0.65rem;
+        font-size: 0.9rem;
+    }
+
+    .submit-button {
+        padding: 0.65rem 1.5rem;
+        font-size: 0.95rem;
     }
 }
