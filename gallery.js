@@ -35,15 +35,13 @@ function isMobile() {
 // Set a single item's row/column span based on its natural aspect ratio
 function sizeItem(item, img) {
     if (img.naturalWidth === 0) return;
-    // Skip grid sizing on mobile — CSS flexbox handles layout
-    if (isMobile()) return;
 
     const { gap, rowHeight, colWidth } = getGridMetrics();
     const ratio = img.naturalWidth / img.naturalHeight;
 
     let colSpan = 1;
-    // ~30% of landscape images span 2 columns for prominence
-    if (ratio > 1.2 && Math.random() > 0.7) {
+    // ~30% of landscape images span 2 columns for prominence (desktop only)
+    if (!isMobile() && ratio > 1.2 && Math.random() > 0.7) {
         colSpan = 2;
         item.style.gridColumn = 'span 2';
         item.dataset.wide = 'true';
@@ -58,7 +56,7 @@ function sizeItem(item, img) {
 // Classify all images — size them as they load, then rebalance
 function classifyAndBalanceGrid() {
     const items = Array.from(document.querySelectorAll('.gallery-item'));
-    let loadedCount = 0;
+    let balanceTimer = null;
 
     items.forEach(item => {
         const img = item.querySelector('img');
@@ -67,10 +65,9 @@ function classifyAndBalanceGrid() {
         const onReady = () => {
             img.classList.add('loaded');
             sizeItem(item, img);
-            loadedCount++;
-            if (loadedCount >= items.length) {
-                balanceGrid();
-            }
+            // Debounce balanceGrid so it runs once after a batch of images load
+            clearTimeout(balanceTimer);
+            balanceTimer = setTimeout(balanceGrid, 150);
         };
 
         if (img.complete && img.naturalWidth > 0) {
@@ -79,6 +76,41 @@ function classifyAndBalanceGrid() {
             img.addEventListener('load', onReady);
         }
     });
+}
+
+// Lazy load images using IntersectionObserver on the scroll container
+// Skipped on mobile since the masonry grid is hidden
+function initLazyLoad() {
+    if (isMobile()) return;
+
+    const scrollContainer = document.querySelector('.gallery-scroll');
+    const images = document.querySelectorAll('.gallery-item img[data-src]');
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const img = entry.target;
+                // Skip if already loaded (e.g. by initFeaturedImage)
+                if (!img.dataset.src) {
+                    observer.unobserve(img);
+                    return;
+                }
+                const src = img.dataset.src;
+                img.removeAttribute('data-src');
+                img.src = src;
+                img.addEventListener('load', () => img.classList.add('loaded'), { once: true });
+                if (img.complete && img.naturalWidth > 0) {
+                    img.classList.add('loaded');
+                }
+                observer.unobserve(img);
+            }
+        });
+    }, {
+        root: scrollContainer,
+        rootMargin: '200px 0px'
+    });
+
+    images.forEach(img => observer.observe(img));
 }
 
 // Cap 2-column items at 20% of gallery, downgrade excess to single-column
@@ -147,6 +179,17 @@ function initFeaturedImage() {
     const img = randomItem.querySelector('img');
 
     if (img) {
+        // Force-load this image if it hasn't been lazy-loaded yet
+        if (img.dataset.src) {
+            const src = img.dataset.src;
+            img.removeAttribute('data-src');
+            img.src = src;
+            // Ensure loaded class is applied for opacity transition
+            img.addEventListener('load', () => img.classList.add('loaded'), { once: true });
+            if (img.complete && img.naturalWidth > 0) {
+                img.classList.add('loaded');
+            }
+        }
         const featuredImg = document.getElementById('featured-img');
         if (featuredImg) {
             featuredImg.src = img.src;
@@ -157,6 +200,8 @@ function initFeaturedImage() {
 
 // Add click-to-select listeners to gallery items
 function initGalleryClicks() {
+    if (isMobile()) return; // mobile uses lightbox instead
+
     const items = document.querySelectorAll('.gallery-item');
     items.forEach(item => {
         item.addEventListener('click', () => {
@@ -173,15 +218,13 @@ function initGalleryScrollLock() {
     const galleryScroll = document.querySelector('.gallery-scroll');
     if (!galleryScroll) return;
 
-    // Skip scroll lock on mobile — horizontal strip scrolls naturally
     if (isMobile()) return;
 
     galleryScroll.addEventListener('wheel', (e) => {
-        // Only trap scroll when the gallery is mostly visible in the viewport
         const rect = galleryScroll.getBoundingClientRect();
         const visibleHeight = Math.min(rect.bottom, window.innerHeight) - Math.max(rect.top, 0);
         if (visibleHeight <= 0 || visibleHeight < rect.height * 0.75) {
-            return; // gallery is mostly off-screen, let the page scroll
+            return;
         }
 
         const { scrollTop, scrollHeight, clientHeight } = galleryScroll;
@@ -190,58 +233,112 @@ function initGalleryScrollLock() {
         const scrollingDown = e.deltaY > 0;
         const scrollingUp = e.deltaY < 0;
 
-        // At boundary scrolling outward — let the page scroll
         if ((atBottom && scrollingDown) || (atTop && scrollingUp)) {
             return;
         }
 
-        // Otherwise trap the scroll inside the gallery
         e.preventDefault();
         galleryScroll.scrollTop += e.deltaY;
     }, { passive: false });
 }
 
-// Auto-scroll the horizontal thumbnail strip on mobile
-function initMobileAutoScroll() {
+// Mobile slideshow with arrows and auto-cycle
+// Uses a curated set of images from assets/gallery-mobile/ for fast loading
+function initMobileSlideshow() {
     if (!isMobile()) return;
 
-    const galleryScroll = document.querySelector('.gallery-scroll');
-    if (!galleryScroll) return;
+    const slideshowImg = document.querySelector('.slideshow-img');
+    const prevBtn = document.querySelector('.slideshow-prev');
+    const nextBtn = document.querySelector('.slideshow-next');
+    if (!slideshowImg || !prevBtn || !nextBtn) return;
 
-    const speed = 0.25; // pixels per frame
-    let animationId = null;
-    let paused = false;
+    let sources = [];
+    let currentIndex = 0;
+    let autoTimer = null;
 
-    function step() {
-        if (!paused) {
-            galleryScroll.scrollLeft += speed;
-
-            // Loop back to start when reaching the end
-            const maxScroll = galleryScroll.scrollWidth - galleryScroll.clientWidth;
-            if (galleryScroll.scrollLeft >= maxScroll) {
-                galleryScroll.scrollLeft = 0;
+    function showImage(index) {
+        slideshowImg.classList.add('fade');
+        setTimeout(() => {
+            slideshowImg.src = sources[index];
+            slideshowImg.onload = () => {
+                slideshowImg.classList.remove('fade');
+            };
+            if (slideshowImg.complete) {
+                slideshowImg.classList.remove('fade');
             }
-        }
-        animationId = requestAnimationFrame(step);
+        }, 300);
     }
 
-    // Pause while the user is touching/swiping
-    galleryScroll.addEventListener('touchstart', () => { paused = true; });
-    galleryScroll.addEventListener('touchend', () => {
-        setTimeout(() => { paused = false; }, 2000);
+    function nextImage() {
+        if (sources.length === 0) return;
+        currentIndex = (currentIndex + 1) % sources.length;
+        showImage(currentIndex);
+    }
+
+    function prevImage() {
+        if (sources.length === 0) return;
+        currentIndex = (currentIndex - 1 + sources.length) % sources.length;
+        showImage(currentIndex);
+    }
+
+    function resetAutoTimer() {
+        clearInterval(autoTimer);
+        autoTimer = setInterval(nextImage, 3650);
+    }
+
+    // Fetch the mobile gallery manifest and start slideshow
+    fetch('assets/gallery-mobile/manifest.json')
+        .then(res => res.json())
+        .then(filenames => {
+            sources = filenames.map(f => 'assets/gallery-mobile/' + f);
+            if (sources.length === 0) return;
+
+            // Shuffle the order
+            for (let i = sources.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [sources[i], sources[j]] = [sources[j], sources[i]];
+            }
+
+            currentIndex = 0;
+            slideshowImg.src = sources[currentIndex];
+            autoTimer = setInterval(nextImage, 3650);
+        })
+        .catch(() => {
+            // Fallback: use gallery items if manifest is missing
+            const items = document.querySelectorAll('.gallery-item img');
+            sources = Array.from(items).map(img => img.dataset.src || img.src).filter(Boolean);
+            if (sources.length === 0) return;
+            currentIndex = Math.floor(Math.random() * sources.length);
+            slideshowImg.src = sources[currentIndex];
+            autoTimer = setInterval(nextImage, 3650);
+        });
+
+    // Arrow clicks
+    nextBtn.addEventListener('click', () => {
+        nextImage();
+        resetAutoTimer();
     });
 
-    animationId = requestAnimationFrame(step);
+    prevBtn.addEventListener('click', () => {
+        prevImage();
+        resetAutoTimer();
+    });
 }
 
 // Run shuffle and init when page loads
 window.addEventListener('DOMContentLoaded', () => {
-    shuffleGallery();
-    classifyAndBalanceGrid();
-    initFeaturedImage();
-    initGalleryClicks();
-    initGalleryScrollLock();
-    initMobileAutoScroll();
+    if (isMobile()) {
+        // Mobile: only init the lightweight slideshow
+        initMobileSlideshow();
+    } else {
+        // Desktop: full gallery experience
+        shuffleGallery();
+        initLazyLoad();
+        classifyAndBalanceGrid();
+        initFeaturedImage();
+        initGalleryClicks();
+        initGalleryScrollLock();
+    }
 });
 
 // Mobile menu toggle functionality

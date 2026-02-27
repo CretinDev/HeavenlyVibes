@@ -17,18 +17,19 @@ body {
     font-weight: 300;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    text-rendering: geometricPrecision;
     overflow-y: scroll;
     height: 100vh;
 }
 
 /* Playfair Display for titles and paragraphs */
 h1, h2, h3, h4, h5, h6, p {
-    font-family: 'Playfair Display', serif;
+    font-family: 'EB Garamond', serif;
 }
 
 /* Playfair Display for navigation */
 .nav-links a, .logo {
-    font-family: 'Playfair Display', serif;
+    font-family: 'EB Garamond', serif;
 }
 
 .container {
@@ -273,7 +274,7 @@ h1, h2, h3, h4, h5, h6, p {
 }
 
 .sector-benefits li {
-    font-family: 'Playfair Display', serif;
+    font-family: 'EB Garamond', serif;
     font-size: clamp(1.05rem, 1.15vw, 1.2rem);
     line-height: 1.8;
     color: #ffffff;
@@ -293,7 +294,7 @@ h1, h2, h3, h4, h5, h6, p {
     text-transform: uppercase;
     cursor: pointer;
     transition: all 0.3s ease;
-    font-family: 'Playfair Display', serif;
+    font-family: 'EB Garamond', serif;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
     flex-shrink: 1;
     white-space: nowrap;
@@ -520,16 +521,30 @@ h1, h2, h3, h4, h5, h6, p {
 
 .contact-content {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr auto 1fr;
     gap: 80px;
     max-width: 100%;
     margin: 0;
+}
+
+.profile-photo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.profile-photo img {
+    max-height: 450px;
+    width: auto;
+    object-fit: contain;
+    border-radius: 4px;
 }
 
 .contact-info {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    max-width: 85%;
 }
 
 .contact-info p {
@@ -756,9 +771,14 @@ footer p {
 
     /* Reduce About section top padding on mobile */
     .about {
-        padding: 40px 0 50px 0;
+        padding: 15px 0 50px 0;
         position: relative;
         z-index: 10;
+    }
+
+    .contact {
+        margin-top: -30px;
+        padding-top: 10px;
     }
 
     /* Fluid scaling About Us header on mobile */
@@ -800,6 +820,10 @@ footer p {
     .contact-content {
         grid-template-columns: 1fr;
         gap: 15px;
+    }
+
+    .profile-photo {
+        display: none;
     }
 
     .reach-out-header {
