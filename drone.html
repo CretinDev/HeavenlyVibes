@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LakeLife Photo Co. - Drone Photography</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon_io/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon_io/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon_io/favicon-16x16.png">
+    <link rel="icon" type="image/x-icon" href="favicon_io/favicon.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="drone.css">
+</head>
+<body id="top">
+    <!-- Navigation Bar -->
+    <nav id="navbar">
+        <div class="nav-container">
+            <ul class="nav-links">
+                <li><a href="#portfolio">Portfolio</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="mobile-menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="portfolio" class="hero">
+        <div class="hero-layout">
+            <!-- Left Column: Title and Tagline -->
+            <div class="hero-content">
+                <h1>LakeLife Photo Co.</h1>
+                <p class="tagline">Capturing Moments that Matter</p>
+
+                <div class="sector-description">
+                    <div class="description-text active" data-sector="default">
+                        <p>We use professional drone imagery to help organizations tell clearer stories, document work that matters, and engage audiences from perspectives that ground cameras can't capture.</p>
+                        <ul class="sector-benefits">
+                            <li>Professional aerial perspectives</li>
+                            <li>Clear visual storytelling</li>
+                            <li>Engaging documentation</li>
+                        </ul>
+                    </div>
+                    <div class="description-text" data-sector="commercial">
+                        <p>We provide accurate aerial visuals for commercial and industrial projects to support planning, progress tracking, inspections, and stakeholder communication—safely and efficiently.</p>
+                        <ul class="sector-benefits">
+                            <li>Reduced inspection costs</li>
+                            <li>Better reporting</li>
+                            <li>Improved project transparency</li>
+                        </ul>
+                    </div>
+                    <div class="description-text" data-sector="industrial">
+                        <p>We support government and public-sector projects with compliant, high-quality aerial data and imagery that improves documentation, public communication, and project oversight.</p>
+                        <ul class="sector-benefits">
+                            <li>Public transparency</li>
+                            <li>Job site progression</li>
+                            <li>Clear reporting</li>
+                        </ul>
+                    </div>
+                    <div class="description-text" data-sector="realestate">
+                        <p>We help real estate professionals market properties more effectively by showcasing location, scale, and surroundings—driving more attention, stronger buyer interest, and faster sales.</p>
+                        <ul class="sector-benefits">
+                            <li>More listing engagement</li>
+                            <li>Better buyer context</li>
+                            <li>Premium marketing perception</li>
+                        </ul>
+                    </div>
+                    <div class="description-text" data-sector="tourism">
+                        <p>We create cinematic aerial visuals that capture the full experience of destinations, helping tourism brands inspire travel, increase engagement, and drive bookings.</p>
+                        <ul class="sector-benefits">
+                            <li>Stronger destination branding</li>
+                            <li>Higher social and ad performance</li>
+                            <li>Increased visitor interest</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column: Buttons and Videos -->
+            <div class="hero-video-section">
+                <div class="sector-buttons">
+                    <button class="sector-btn" data-sector="commercial">Commercial</button>
+                    <button class="sector-btn" data-sector="industrial">Industrial</button>
+                    <button class="sector-btn" data-sector="realestate">Real Estate</button>
+                    <button class="sector-btn" data-sector="tourism">Tourism</button>
+                </div>
+
+                <div class="video-container">
+                    <video class="hero-video" muted playsinline preload="auto" data-sector="default" data-index="0">
+                        <source src="assets/broad-1.mp4" type="video/mp4">
+                    </video>
+                    <video class="hero-video" muted playsinline preload="auto" data-sector="default" data-index="1">
+                        <source src="assets/broad-3.mp4" type="video/mp4">
+                    </video>
+                    <video class="hero-video" muted playsinline preload="auto" data-sector="default" data-index="2">
+                        <source src="assets/Broad-4.mp4" type="video/mp4">
+                    </video>
+                    <video class="hero-video" muted playsinline preload="auto" data-sector="default" data-index="3">
+                        <source src="assets/Broad-5.mp4" type="video/mp4">
+                    </video>
+                    <video class="hero-video" muted playsinline preload="auto" data-sector="default" data-index="4">
+                        <source src="assets/Broad-6.mp4" type="video/mp4">
+                    </video>
+                    <video class="hero-video" muted playsinline data-sector="commercial" data-index="0">
+                        <source src="assets/commercial-1.mp4" type="video/mp4">
+                    </video>
+                    <video class="hero-video" muted playsinline data-sector="commercial" data-index="1">
+                        <source src="assets/Commercial-2.mp4" type="video/mp4">
+                    </video>
+                    <video class="hero-video" muted playsinline data-sector="industrial" data-index="0">
+                        <source src="assets/industrial-1.mp4" type="video/mp4">
+                    </video>
+                    <video class="hero-video" muted playsinline data-sector="industrial" data-index="1">
+                        <source src="assets/industrial-2.mp4" type="video/mp4">
+                    </video>
+                    <video class="hero-video" muted playsinline data-sector="industrial" data-index="2">
+                        <source src="assets/industrial-3.mp4" type="video/mp4">
+                    </video>
+                    <video class="hero-video" muted playsinline data-sector="realestate" data-index="0">
+                        <source src="assets/realestate-1.mp4" type="video/mp4">
+                    </video>
+                    <video class="hero-video" muted playsinline data-sector="realestate" data-index="1">
+                        <source src="assets/realestate-2.mp4" type="video/mp4">
+                    </video>
+                    <video class="hero-video" muted playsinline data-sector="tourism" data-index="0">
+                        <source src="assets/Tourism-1.mp4" type="video/mp4">
+                    </video>
+                    <video class="hero-video" muted playsinline data-sector="tourism" data-index="1">
+                        <source src="assets/Tourism-2.mp4" type="video/mp4">
+                    </video>
+                    <video class="hero-video" muted playsinline data-sector="tourism" data-index="2">
+                        <source src="assets/Tourism-3.mp4" type="video/mp4">
+                    </video>
+                    <video class="hero-video" muted playsinline data-sector="tourism" data-index="3">
+                        <source src="assets/Tourism-4.mp4" type="video/mp4">
+                    </video>
+                    <video class="hero-video" muted playsinline data-sector="tourism" data-index="4">
+                        <source src="assets/Tourism-5.mp4" type="video/mp4">
+                    </video>
+                </div>
+            </div>
+        </div>
+
+        <div class="scroll-indicator">
+            <span>Scroll Down</span>
+            <div class="arrow"></div>
+        </div>
+    </section>
+
+    <!-- About/Contact Section -->
+    <section id="contact" class="about contact">
+        <div class="container">
+            <h2>About Me</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>Hi. My name is Jim Craven. I am the owner, operator, and primary driver of the LakeLife Photo Co. I moved to the Nipissing area from the United States in 2016 after earning a Telecommunications degree in Broadcast and Media production in Arizona. I have an interest in exploration imagery, and have a very "boots on the ground" approach to my work. I enjoy industrial and construction imagery and like to provide progression updates of development projects taking place around the Nipissing area.</p>
+                    <p>In addition to drone imagery, I do the very niche and notorious artwork known as stereoscopic 3d film photography. And within the film medium I also offer candid portraiture and event photography for weddings, engagements, and celebrations of life.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="contact-section-wrapper">
+            <h2 style="margin-top: 4rem;">Our Services</h2>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <p>We specialize in real estate photography and video, providing stunning aerial perspectives that showcase properties in their best light. Our event coverage captures the moments that matter most, from weddings to corporate gatherings. We excel in landscape and nature photography, revealing the beauty of Northern Ontario's wilderness. Our commercial and promotional content helps businesses tell their story through compelling visual narratives.</p>
+                </div>
+                <div class="form-wrapper">
+                    <h3 class="reach-out-header">Reach Out</h3>
+                    <form class="contact-form" action="https://formspree.io/f/xkovolpn" method="POST">
+                    <div class="form-group">
+                        <input type="text" name="name" placeholder="Your Name" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" name="email" placeholder="Your Email" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="tel" name="phone" placeholder="Phone Number">
+                    </div>
+                    <div class="form-group">
+                        <textarea name="message" placeholder="Tell us about your project" rows="5" required></textarea>
+                    </div>
+                    <button type="submit" class="submit-button">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 LakeLife Photo Co. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="drone.js"></script>
+</body>
+</html>
