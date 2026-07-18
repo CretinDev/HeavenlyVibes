@@ -21,25 +21,30 @@
 
 * { box-sizing:border-box; margin:0; padding:0; }
 
+html, body {
+  height:100%;
+  overflow:hidden;
+}
+
 body {
   background:#d8cdbb;
-  min-height:100vh;
   display:flex;
   align-items:center;
   justify-content:center;
-  padding:24px 0;
+  padding:0;
   font-family:'Garamond', serif;
 }
 
 .poster {
   container-type: inline-size;
-  width:min(1080px, 94vw);
+  width:min(94vh, calc(94vw * 9 / 16));
   aspect-ratio: 1080/1920;
   background:var(--paper);
   position:relative;
   overflow:hidden;
   box-shadow:0 30px 70px rgba(0,0,0,.35);
   border-radius: 2px;
+  transform: rotate(90deg);
 }
 
 .poster::before {
