@@ -17,6 +17,9 @@
   --rust:#b04f29;
   --gold:#a87a3f;
   --cream-white:#faf5ec;
+  --poster-w:94vw;
+  --body-pad:24px;
+  --poster-shadow:0 30px 70px rgba(0,0,0,.35);
 }
 
 * { box-sizing:border-box; margin:0; padding:0; }
@@ -27,18 +30,18 @@ body {
   display:flex;
   align-items:center;
   justify-content:center;
-  padding:24px 0;
+  padding:var(--body-pad) 0;
   font-family:'Garamond', serif;
 }
 
 .poster {
   container-type: inline-size;
-  width:min(1080px, 94vw);
+  width:min(1080px, var(--poster-w));
   aspect-ratio: 1080/1920;
   background:var(--paper);
   position:relative;
   overflow:hidden;
-  box-shadow:0 30px 70px rgba(0,0,0,.35);
+  box-shadow:var(--poster-shadow);
   border-radius: 2px;
 }
 
@@ -234,6 +237,14 @@ body {
   text-underline-offset:0.15cqw;
 }
 </style>
+<script>
+if (new URLSearchParams(location.search).get('embed')) {
+  var r = document.documentElement.style;
+  r.setProperty('--poster-w', '99.5vw');
+  r.setProperty('--body-pad', '3px');
+  r.setProperty('--poster-shadow', '0 6px 16px rgba(0,0,0,.35)');
+}
+</script>
 </head>
 <body>
 <div class="poster">
